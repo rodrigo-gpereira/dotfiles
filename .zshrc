@@ -26,20 +26,9 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 source $ZSH/oh-my-zsh.sh
 
 #ANDROID
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-#export PATH=$HOME/bin:$PATH
-
-# ANDROID SDK do Windows
-#export ANDROID_HOME=/mnt/c/Users/rodri/AppData/Local/Android/Sdk
-#export PATH=$PATH:$ANDROID_HOME/platform-tools
-#export PATH=$PATH:$ANDROID_HOME/emulator
+#export ANDROID_HOME=$HOME/Android/Sdk
 #export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-
-## ADB ALIAS
-#alias adb="adb.exe"
+#export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #ASDF
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
@@ -50,9 +39,23 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 autoload -Uz compinit && compinit
 
 
-## SSH ALIAS
-alias ssh-add='ssh-add.exe'
-alias ssh='ssh-add.exe -l > /dev/null || ssh-add.exe && echo -e "\e[92mssh-key(s) are now available in your ssh-agent until you lock your windows machine! \n \e[0m" && ssh.exe'
+## CUSTOM WSL ENVIROMENT
+if [ -n "$WSL_DISTRO_NAME" ]; then
+
+  # SSH ALIAS
+  alias ssh-add='ssh-add.exe'
+  alias ssh='ssh-add.exe -l > /dev/null || ssh-add.exe && echo -e "\e[92mssh-key(s) are now available in your ssh-agent until you lock your windows machine! \n \e[0m" && ssh.exe'
+
+  # ANDROID SDK do Windows
+  #export ANDROID_HOME=/mnt/c/Users/rodri/AppData/Local/Android/Sdk
+  #export PATH=$PATH:$ANDROID_HOME/platform-tools
+  #export PATH=$PATH:$ANDROID_HOME/emulator
+  #export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+
+  ## ADB ALIAS
+  #alias adb="adb.exe"
+
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
